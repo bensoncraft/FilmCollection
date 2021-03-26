@@ -64,7 +64,7 @@ namespace FilmCollection.Controllers
             {
                 _context.Add(movie);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(MovieList));
             }
             return View(movie);
         }
@@ -120,7 +120,7 @@ namespace FilmCollection.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(MovieList));
             }
             return View(movie);
         }
@@ -151,7 +151,7 @@ namespace FilmCollection.Controllers
             var movie = await _context.Movies.FindAsync(id);
             _context.Movies.Remove(movie);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(MovieList));
         }
 
         private bool MovieExists(int id)
