@@ -6,8 +6,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FilmCollection.Models
 {
-    public class ApplicationResponse
+    public class Movie
     {
+        [Key]
+        [Required]
+        public int MovieId { get; set; }
+
         [Required(ErrorMessage = "Please enter a Category")]
         public string Category { get; set; }
 

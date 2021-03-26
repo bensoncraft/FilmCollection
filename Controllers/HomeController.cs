@@ -11,11 +11,13 @@ namespace FilmCollection.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private MovieDbContext context { get; set; }
+
+        //contructor
+        public HomeController(MovieDbContext con)
         {
-            _logger = logger;
+            context = con;
         }
 
         public IActionResult Index()
@@ -35,16 +37,39 @@ namespace FilmCollection.Controllers
         }
 
         [HttpPost]
-        public IActionResult EnterMovies(ApplicationResponse appResponse)
+        public IActionResult EnterMovies(Movie mov)
         {
-            TempStorage.AddMovie(appResponse);
+            if (ModelState.IsValid)
+            {
+                context.Movies.Add(mov);
+                context.SaveChanges();
+            }
+
             return View();
         }
 
         public IActionResult MovieList()
         {
-            return View(TempStorage.Movies.Where(x => x.Title != "Independence Day")); //Code to exclude Independence Day from showing in the list on MovieList page
+            return View(context.Movies);
         }
+
+        // GET: Movies/Delete/5
+        /*public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var movie = await _context.Movies
+                .FirstOrDefaultAsync(m => m.MovieId == id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            return View(movie);
+        }*/
 
         public IActionResult Privacy()
         {

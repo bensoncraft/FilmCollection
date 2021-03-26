@@ -3,23 +3,36 @@
 <head>
     <title>The Joel Hilton Film Collection</title>
     <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 
 <body>
 
-    <!--Shared page tabs-->
-    <a asp-action="Index">Home</a>
-    <a asp-action="MyPodcasts">My Podcasts</a>
-    <a asp-action="EnterMovies">Enter Movies</a> 
-    <a asp-action="MovieList">Movie List</a>
+    <div class="bg-dark text-white p-2">
+        <span>Film Collection</span>
 
+        <!--Shared page tabs-->
+            &nbsp;|&nbsp;
+        <a asp-action="Index">Home</a>
+            &nbsp;|&nbsp;
+        <a asp-action="MyPodcasts">My Podcasts</a>
+            &nbsp;|&nbsp;
+        <a asp-action="Create">Enter Movies</a>
+            &nbsp;|&nbsp;
+        <a asp-action="MovieList">Movie List</a>
+    </div>
+    
 
-    <h1>@ViewBag.Title</h1>
+    <div class="text-center">
+        <h1>@ViewBag.Title</h1>
 
-    @RenderBody()
-
-    <br />
-    <br />
+        @RenderBody()
+        @RenderSection("scripts", false)
+        <br />
+        <br />
+    </div>
+    
 
 </body>
 </html>
